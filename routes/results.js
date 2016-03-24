@@ -3,8 +3,8 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  console.log(req.route);
-  res.render('statistics', { title: 'Colenso Project Statistics'});
+  console.log(req.originalUrl);
+  res.render('results', { title: 'Colenso Project Search Results'});
 });
 
 module.exports = router;
