@@ -16,16 +16,11 @@ router.get('/', function(req, res, next) {
         function (error, result) {
             if(error){ console.error(error);}
             else {
-
-                //console.log(Object.getOwnPropertyNames(result))
-                //console.log(typeof result.result)
-                console.log(searchString +"hi")
                 var stuff = result.result
                 stuff = stuff.substring(1 + searchString.length,stuff.length)
                 stuff = stuff.split("<" + searchString)
-                console.log(stuff.length)
                 for(var i = 0; i < stuff.length;i++){
-                    stuff[i] = "<p" + stuff[i]
+                    stuff[i] = "<" + searchString + stuff[i]
                 }
                 client.execute(
                     "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';"+
@@ -34,8 +29,6 @@ router.get('/', function(req, res, next) {
                     function (error, result){
                         if(error){ console.error(error);}
                         else{
-                            console.log(result.result)
-                            //console.log('got here')
                             var docPaths = result.result
                             docPaths = docPaths.split("\n")
                             res.render('results', {
@@ -51,7 +44,6 @@ router.get('/', function(req, res, next) {
             }
         }
     );
-  //res.render('results', { title: 'Colenso Project Search Results'});
 });
 
 module.exports = router;
