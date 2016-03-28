@@ -1,7 +1,6 @@
 extends layout
-extends ../node_modules/jade-bootstrap/_bootstrap
 
-block body
+block  body
 	+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/") Home
 			+nav_item("/search") Search
@@ -9,3 +8,7 @@ block body
 	.container
 		h1= title
 		p| Welcome to #{title}. We have many search statistics ready for you
+		p  #{thing}
+		- each val in thing
+			+panel-info(stuff)
+				p!=	val

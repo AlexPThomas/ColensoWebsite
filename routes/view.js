@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     console.log(req.originalUrl);
-    res.render('search', { title: 'Colenso Project Search'});
+    res.render('view', { title: 'Colenso Project Search'});
 });
 
 module.exports = router;

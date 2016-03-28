@@ -1,20 +1,30 @@
 extends layout
-extends ../node_modules/jade-bootstrap/_bootstrap
 
 block body
-	+navbar("Colenso Project", "dropdown_menu")
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/") Home
 			+nav_item("/search","active") Search
 			+nav_item("/statistics") statistics
-	.container
-		h1= title
-		p| Welcome to #{title}. We have some results for you
+		.container
+			h1= title
+			p| Welcome to #{title}. 
 	.container
 		form(action="/results",method="get")
-			+input("text","searchString","Search","Search-box",type="text")
+			+input("text","searchString","Search","Search-box",type="text") 
 			+submit-primary("search")
 		br
 	.container
-		- for (var x = 0; x < 3; x++)
-			+panel-info("A letter")
-				p  there is some information here
+		//- var stuff = #{query}
+		//- stuff = #{query}
+		//- stuff = stuff.split('l')
+		//p!= typeof query
+		//p #{query}
+		- for(var x = 0; x < query.length; x++)
+			- var finalSlashIndex = docPaths[x].lastIndexOf('/')
+			- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)
+			+panel-info(docName)
+				a(href = "/view?path=" + docPaths[x]) View entire document 
+				br
+				br
+				p #{query[x]}
