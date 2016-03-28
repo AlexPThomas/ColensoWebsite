@@ -11,15 +11,20 @@ router.get('/', function(req, res, next) {
     var rootPath = "./Colenso/"
     client.execute(
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
-        " (//" + searchString + ")[position() = (1 to 10)]\n",
+        " for $n in (//" + searchString + ")[position() = (1 to 10)]\n"+
+        "return concat($n,'STOPBLURG')\n",
         function (error, result) {
             if(error){ console.error(error);}
             else {
 
                 //console.log(Object.getOwnPropertyNames(result))
                 //console.log(typeof result.result)
+                console.log(result.result)
                 var stuff = result.result
-                stuff = stuff.split("\n")
+                //remove the last stopblurg so it doesn't split too many times
+                stuff = stuff.substring(0,stuff.length-9)
+                stuff = stuff.split("STOPBLURG")
+                console.log(stuff.length)
                 client.execute(
                     "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';"+
                     "for $n in (//p)[position() = 1 to 10]\n" +
@@ -27,7 +32,7 @@ router.get('/', function(req, res, next) {
                     function (error, result){
                         if(error){ console.error(error);}
                         else{
-                            //console.log(result.result)
+                            console.log(result.result)
                             //console.log('got here')
                             var docPaths = result.result
                             docPaths = docPaths.split("\n")
