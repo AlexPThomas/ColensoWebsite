@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     client.execute(
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
         " for $n in (//" + searchString + ")[position() = (1 to 10)]\n"+
-        "return concat($n,'STOPBLURG')\n",
+        "return $n\n",
         function (error, result) {
             if(error){ console.error(error);}
             else {
@@ -21,10 +21,12 @@ router.get('/', function(req, res, next) {
                 //console.log(typeof result.result)
                 console.log(result.result)
                 var stuff = result.result
-                //remove the last stopblurg so it doesn't split too many times
-                stuff = stuff.substring(0,stuff.length-9)
-                stuff = stuff.split("STOPBLURG")
+                stuff = stuff.substring(1 + searchString.length,stuff.length)
+                stuff = stuff.split("<" + searchString)
                 console.log(stuff.length)
+                for(var i = 0; i < stuff.length;i++){
+                    stuff[i] = "<p" + stuff[i]
+                }
                 client.execute(
                     "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';"+
                     "for $n in (//p)[position() = 1 to 10]\n" +
