@@ -8,8 +8,10 @@ block body
 	.container
 		h1= title
 		p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
-		| We are based in !{place}.
 	.container
-		form(action="/search",method="get")
-			input(type="text",name="searchString")
-			input(type="submit")
+		+panel-info(docPath)
+			p	#{document}
+			br
+			br
+			p	!{document}
+			
