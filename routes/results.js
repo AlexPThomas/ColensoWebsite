@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     var rootPath = "./Colenso/"
     client.execute(
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
-        " for $n in (//" + searchString + ")[position() = (1 to 10)]\n"+
+        " for $n in (//" + searchString +")[position() = (1 to 10)]\n"+
         "return $n\n",
         function (error, result) {
             if(error){ console.error(error);}
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
                 //console.log(Object.getOwnPropertyNames(result))
                 //console.log(typeof result.result)
-                console.log(result.result)
+                console.log(searchString +"hi")
                 var stuff = result.result
                 stuff = stuff.substring(1 + searchString.length,stuff.length)
                 stuff = stuff.split("<" + searchString)
@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
                 }
                 client.execute(
                     "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';"+
-                    "for $n in (//p)[position() = 1 to 10]\n" +
+                    "for $n in (//" + searchString +")[position() = 1 to 10]\n" +
                     "return db:path($n)",
                     function (error, result){
                         if(error){ console.error(error);}

@@ -9,9 +9,14 @@ block body
 		h1= title
 		p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
 	.container
-		+panel-info(docPath)
-			p	#{document}
+		if viewTEI == "true"
+			+a-btn-primary("/view?path=" + docPath + "&tei=false") View without tags
 			br
+			+panel-info(docPath)
+				p #{document}
+		else
+			+a-btn-primary("/view?path=" + docPath + "&tei=true") View with tags
 			br
-			p	!{document}
+			+panel-info(docPath)
+				p !{document}
 			

@@ -24,9 +24,10 @@ block body
 			- var finalSlashIndex = docPaths[x].lastIndexOf('/')
 			- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)
 			+panel-info(docName)
-				a(href = "/view?path=" + docPaths[x]) View entire document 
+				a(href = "/view?path=" + docPaths[x] + "&tei=true") View entire document with tags
 				br
 				br
 				p #{query[x]}
 				br
+				a(href = "/view?path=" + docPaths[x] + "&tei=false") View entire document without tags
 				p!= query[x]

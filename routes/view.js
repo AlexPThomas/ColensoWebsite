@@ -8,6 +8,7 @@ client.execute("OPEN Colenso");
 router.get('/', function(req, res, next) {
     var rootPath = "./Colenso/"
     var docPath = req.query.path
+    var viewTEI = req.query.tei
     console.log(docPath)
     client.execute(
         "XQUERY doc('" + rootPath + docPath + "')",
@@ -17,7 +18,8 @@ router.get('/', function(req, res, next) {
                 res.render('view', {
                     title: 'Colenso Project view',
                     document:result.result,
-                    docPath:docPath
+                    docPath:docPath,
+                    viewTEI:viewTEI
                 });
             }
         }
