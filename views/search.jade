@@ -1,18 +1,20 @@
 extends layout
 
 block body
-	+navbar("Colenso Project", "dropdown_menu")
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/") Home
 			+nav_item("/search","active") Search
 			+nav_item("/statistics") statistics
-	.container
-		h1= title
-		p| Welcome to #{title}. We have an easy system for you to use to search through our stock of coleno letters
-	.container
-		form(action="/results",method="get")
-			+input("text","searchString","Search","Search-box",type="text")
-			+submit-primary("search")
-		br
+		.container
+			h1= title
+			p| Welcome to #{title}. 
+		.container
+			form(action="/results",method="get")
+				+input("text","searchString","Search","Search-box",type="text")
+				+input("text","searchString","Attribute/s","Attributes",type="xPath")
+				+submit-primary("Search")
+			br
 	.container
 		- for (var x = 0; x < 3; x++)
 			+panel-info("A letter")

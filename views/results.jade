@@ -9,25 +9,26 @@ block body
 		.container
 			h1= title
 			p| Welcome to #{title}. 
-	.container
-		form(action="/results",method="get")
-			+input("text","searchString","Search","Search-box",type="text") 
-			+submit-primary("search")
-		br
-	.container
-		//- var stuff = #{query}
-		//- stuff = #{query}
-		//- stuff = stuff.split('l')
-		//p!= typeof query
-		//p #{query}
-		- for(var x = 0; x < query.length; x++)
-			- var finalSlashIndex = docPaths[x].lastIndexOf('/')
-			- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)
-			+panel-info(docName)
-				a(href = "/view?path=" + docPaths[x] + "&tei=true") View entire document with tags
-				br
-				br
-				p #{query[x]}
-				br
-				a(href = "/view?path=" + docPaths[x] + "&tei=false") View entire document without tags
-				p!= query[x]
+		.container
+			form(action="/results",method="get")
+				+input("text","searchString","Search","Search-box",type="text")
+				+input("text","searchString","Attribute/s","Attributes",type="xPath")
+				+submit-primary("Search")
+			br
+	if failed == "true"
+		.container
+			h3 Your search of #{searchString} #{xPath} failed to return any results
+	else
+		.container
+			h3 Your search of "#{searchString}" with the attributes #{xPath} returned the following results
+			- for(var x = 0; x < query.length; x++)
+				- var finalSlashIndex = docPaths[x].lastIndexOf('/')
+				- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)
+				+panel-info(docName)
+					a(href = "/view?path=" + docPaths[x] + "&tei=true") View entire document with tags
+					br
+					br
+					p #{query[x]}
+					br
+					a(href = "/view?path=" + docPaths[x] + "&tei=false") View entire document without tags
+					p!= query[x]
