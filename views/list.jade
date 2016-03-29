@@ -1,0 +1,19 @@
+extends layout
+
+block body
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
+			+nav_item("/") Home
+			+nav_item("/list","active") Document list
+			+nav_item("/search") Search
+			+nav_item("/statistics") statistics
+		.container
+			h1= title
+			p| Welcome to #{title}. 
+	.container
+		-var newCount = count + 10
+		+list-group-custom()
+			each doc in results
+				+list-group-item("/view?path=" + doc +"&tei=false")
+					h5.list-group-item-heading View document #{doc} 
+		+a-btn-primary("/list" + "?count=" + newCount) Next 

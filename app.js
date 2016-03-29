@@ -12,6 +12,7 @@ var search = require('./routes/search');
 var statistics = require('./routes/statistics');
 var results = require('./routes/results');
 var view = require('./routes/view');
+var list = require('./routes/list');
 var app = express();
 
 // view engine setup
@@ -31,6 +32,7 @@ app.use('/search', search);
 app.use('/statistics', statistics);
 app.use('/results',results);
 app.use('/view',view);
+app.use('/list',list)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

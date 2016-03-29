@@ -4,6 +4,7 @@ block body
 	.jumbotron
 		+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/") Home
+			+nav_item("/list") Document list
 			+nav_item("/search","active") Search
 			+nav_item("/statistics") statistics
 		.container
@@ -12,7 +13,7 @@ block body
 		.container
 			form(action="/results",method="get")
 				+input("text","searchString","Search","Search-box",type="text")
-				+input("text","searchString","Attribute/s","Attributes",type="xPath")
+				+input("text","searchString","Attribute","Attribute",type="xPath")
 				+submit-primary("Search")
 			br
 	if failed == "true" || docPaths[0] == ""

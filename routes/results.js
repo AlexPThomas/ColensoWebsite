@@ -15,8 +15,6 @@ router.get('/', function(req, res, next) {
     }
     count = parseInt(count)
     countString = count.toString() + " to " + (count + 9).toString();
-    console.log(count);
-    console.log(countString);
     var xPath = req.query.xPath;
     if(xPath == undefined || xPath == ""){
         xPath = "";
@@ -25,10 +23,7 @@ router.get('/', function(req, res, next) {
     }else{
         xPath = "[" + xPath + "]";
     }
-
     var rootPath = "./Colenso/";
-
-
     client.execute(
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
         " for $n in (//" + searchString + xPath + ")[position() =(" + countString+")]\n"+
