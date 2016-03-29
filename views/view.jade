@@ -12,10 +12,12 @@ block body
 		if viewTEI == "true"
 			+a-btn-primary("/view?path=" + docPath + "&tei=false") View without tags
 			br
+			br
 			+panel-info(docPath)
 				p #{document}
 		else
 			+a-btn-primary("/view?path=" + docPath + "&tei=true") View with tags
+			br
 			br
 			+panel-info(docPath)
 				p !{document}

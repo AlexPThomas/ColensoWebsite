@@ -15,12 +15,13 @@ block body
 				+input("text","searchString","Attribute/s","Attributes",type="xPath")
 				+submit-primary("Search")
 			br
-	if failed == "true"
+	if failed == "true" || docPaths[0] == ""
 		.container
-			h3 Your search of #{searchString} #{xPath} failed to return any results
+			h4 Your search of #{searchString} #{xPath} failed to return any results
 	else
 		.container
-			h3 Your search of "#{searchString}" with the attributes #{xPath} returned the following results
+			h4 Your search of "#{searchString}" with the attributes #{xPath} returned the following results
+			-var newCount = count + 10
 			- for(var x = 0; x < query.length; x++)
 				- var finalSlashIndex = docPaths[x].lastIndexOf('/')
 				- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)
@@ -32,3 +33,4 @@ block body
 					br
 					a(href = "/view?path=" + docPaths[x] + "&tei=false") View entire document without tags
 					p!= query[x]
+			+a-btn-primary("/results?text=" + searchString + "&xPath=" + xPath + "&count=" + newCount) Next       
