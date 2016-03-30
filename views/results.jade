@@ -10,18 +10,29 @@ block body
 			h1= title
 			p| Welcome to #{title}. 
 		.container
-			form(action="/results",method="get")
-				+input("text","searchString","Search","Search-box",type="text")
-				+input("text","searchString","Attribute","Attribute",type="xPath")
-				+submit-primary("Search")
-			br
+			+panel-success("Search by TEI tags and attributes")
+				form(action="/results",method="get")
+					h4 HINTS
+					ul
+						li Here you can search for all the tags with certain attributes and then go to and view the documents they came from
+						li The first Attribute must start with a @ and subsequent ones must have an and before them
+						li Here are some examples of valid searches
+						ul
+							li Tag = name Attributes = ''
+							li Tag = name Attributes = @type = 'place'
+							li Tag = name Attributes = @type = 'place' and position() = 1
+					+input("text","searchString","Search","Tag",type="text")
+					+input("text","searchString","Attributes","XPath",type="xPath")
+					+submit-primary("Search")
+				br
 	if failed == "true" || docPaths[0] == ""
 		.container
-			h4 Your search of #{searchString} #{xPath} failed to return any results
+			h3 Your search of #{searchString} #{xPath} failed to return any results
 	else
 		.container
-			h4 Your search of "#{searchString}" with the attributes #{xPath} returned #{resultAmount} results
 			-var newCount = count + 20
+			h4| Your search of "#{searchString}" with the attributes #{xPath} returned #{resultAmount} results
+			h4| displaying #{count} to #{newCount} results
 			- for(var x = 0; x < query.length; x++)
 				- var finalSlashIndex = docPaths[x].lastIndexOf('/')
 				- var docName = docPaths[x].substring(finalSlashIndex+1,docPaths[x].length)

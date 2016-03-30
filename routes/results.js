@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
         " for $n in (//" + searchString + xPath + ")[position() =(" + countString+")]\n"+
         "return $n\n",
+
         function (error, result) {
             if(error){
                 console.error(error);

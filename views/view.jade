@@ -8,11 +8,11 @@ block body
 			+nav_item("/search") Search
 		.container
 			h1= title
-			p| Welcome to #{title}. 
+			p| Welcome to #{title}.
+		.container
+			p You are viewing the document at #{docPath}
+			+a-btn-success("/download?path=" + docPath) Download Raw Document
 	.container
-		+a-btn-success("/download?path=" + docPath) Download Raw Document
-		br
-		br
 		if viewTEI == "true"
 			+a-btn-primary("/view?path=" + docPath + "&tei=false") View without tags
 			br

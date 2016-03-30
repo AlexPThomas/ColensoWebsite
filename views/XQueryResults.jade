@@ -1,0 +1,37 @@
+extends layout
+
+block  body
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
+			+nav_item("/") Home
+			+nav_item("/list") Document list
+			+nav_item("/search","active") Search
+		.container
+			h1= title
+			p| Welcome to #{title}. 
+		.container
+			+panel-success("Search by XQuery - find all documents that match the given XQuery")
+				h4 HINTS
+				ul
+					li The TEI Namespace and XQUERY text is already generated for you
+					li You have to make sure you make a correct syntactically correct Query
+					li Here are some examples of valid XQueries
+					ul
+						li //name
+						li //name[@type = 'place' and position() = 1 and . = 'Manawarakau']
+						li //author//name
+				form(action="/XQueryResults",method="get")
+					+input("text","searchString","Query","Search-XQuery",type="text")
+					+submit-primary("Search")
+	if failed == "true"
+		.container
+			h3 Your search of #{searchString} failed to return any results
+	else
+		.container
+			h3 There are #{resultCount} documents that match '#{searchString}'
+			+panel-info("Results")
+				+list-group-custom()
+					each doc in results
+						+list-group-item("/view?path=" + doc +"&tei=false")
+							h5.list-group-item-heading View document #{doc}
+		

@@ -19,6 +19,7 @@ router.get("/",function(req,res){
 
                 var results = result.result;
                 results = results.split("\n");
+                var resultAmount = results.length;
                 var count = req.query.count;
                 if(count == undefined || count == "" || parseInt(count) > results.length){
                     count = 0;
@@ -33,7 +34,8 @@ router.get("/",function(req,res){
                 res.render('list', {
                     title: 'Colenso Project List',
                     results: results,
-                    count: count
+                    count: count,
+                    resultAmount:resultAmount
                 });
             }
         }

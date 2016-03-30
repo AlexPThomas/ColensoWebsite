@@ -13,6 +13,7 @@ var stringResults = require('./routes/stringResults');
 var results = require('./routes/results');
 var view = require('./routes/view');
 var list = require('./routes/list');
+var XQueryResults = require('./routes/XQueryResults');
 var app = express();
 
 // view engine setup
@@ -33,7 +34,7 @@ app.use('/stringResults', stringResults);
 app.use('/results',results);
 app.use('/view',view);
 app.use('/list',list)
-
+app.use('/XQueryResults',XQueryResults);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

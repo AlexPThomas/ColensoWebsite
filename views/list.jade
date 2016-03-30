@@ -11,8 +11,10 @@ block body
 			p| Welcome to #{title}. 
 	.container
 		-var newCount = count + 20
-		+list-group-custom()
-			each doc in results
-				+list-group-item("/view?path=" + doc +"&tei=false")
-					h5.list-group-item-heading View document #{doc} 
+		h4 displaying #{count} to #{newCount} of #{resultAmount} results
+		+panel-info("Results")
+			+list-group-custom()
+				each doc in results
+					+list-group-item("/view?path=" + doc +"&tei=false")
+						h5.list-group-item-heading View document #{doc} 
 			+a-btn-primary("/list" + "?count=" + newCount) Next 

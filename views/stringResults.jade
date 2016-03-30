@@ -10,19 +10,25 @@ block  body
 			h1= title
 			p| Welcome to #{title}. 
 		.container
-			h3 find all documents that contain specified text
-			h4 HINTS
-			ul 
-				li The following logical operators are available for use - +and, +or
-				li Make sure the text you are searching for is in quotes 'Wellington'
-				li A valid example search would be - 'Wellington' +and 'William'
-			form(action="/stringResults",method="get")
-				+input("text","searchString","Search","Search-box",type="text")
-				+submit-primary("Search")
+			+panel-success("Search by text - find all documents that contain specified text")
+				h4 HINTS
+				ul 
+					li The following logical operators are available for use - ftand (and), ftor (or), ftnot(not)
+					li Make sure the text you are searching for is in quotes 'Wellington'
+					li Here are some examples of valid searches
+					ul
+						li 'Wellington'
+						li 'Wellington' ftand 'William'
+						li 'Wellington' ftor 'William'
+						li ftnot 'William' ftand 'Wellington' ftor 'Petoni'
+				form(action="/stringResults",method="get")
+					+input("text","searchString","Text","Search-Text",type="text")
+					+submit-primary("Search")
 	.container
 		h3 There are #{resultCount} documents that contain '!{searchString}'
-		+list-group-custom()
-			each doc in results
-				+list-group-item("/view?path=" + doc +"&tei=false")
-					h5.list-group-item-heading View document #{doc}
+		+panel-info("Results")
+			+list-group-custom()
+				each doc in results
+					+list-group-item("/view?path=" + doc +"&tei=false")
+						h5.list-group-item-heading View document #{doc}
 		
