@@ -9,9 +9,9 @@ block body
 			+nav_item("/add") Add Document
 		.container
 			h1= title
-			p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
-			| We are based in !{place}.
-		.container
-			form(action="/search",method="get")
-				input(type="text",name="searchString")
-				input(type="submit")
+			p| Welcome to #{title}.
+			p Here you can search through and look at documents in the Colenso Letter database.
+			p For more information click on the link below
+			a(href = "http://www.williamcolenso.co.nz/")
+				p here is a link to the Colenso Official Website
+		
