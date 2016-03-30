@@ -6,6 +6,7 @@ block  body
 			+nav_item("/") Home
 			+nav_item("/list") Document list
 			+nav_item("/search","active") Search
+			+nav_item("/add") Add Document
 		.container
 			h1= title
 			p| Welcome to #{title}. 
@@ -18,7 +19,7 @@ block  body
 					li Here are some examples of valid XQueries
 					ul
 						li //name
-						li //name[@type = 'place' and position() = 1 and . = 'Manawarakau']
+						li //name[@type = 'place' and position() = 1 ]
 						li //author//name
 				form(action="/XQueryResults",method="get")
 					+input("text","searchString","Query","Search-XQuery",type="text")

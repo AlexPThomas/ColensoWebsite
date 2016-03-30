@@ -32,7 +32,7 @@ router.get("/",function(req,res){
                 results = results.slice(count,count2);
                 console.log(results);
                 res.render('list', {
-                    title: 'Colenso Project List',
+                    title: 'Colenso Project Document List',
                     results: results,
                     count: count,
                     resultAmount:resultAmount

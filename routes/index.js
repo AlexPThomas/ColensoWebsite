@@ -34,4 +34,44 @@ router.get("/download",function(req,res){
     )
 })
 
+router.get("/add",function(req,res){
+    if(req.query.path === undefined || req.query.text === undefined){
+        console.log('here')
+        res.render('add',{
+            title: 'Colenso Project Home',
+            fileSelected:'false'
+        });
+    }else{
+        console.log('over here')
+        console.log(typeof req.query.filePath);
+        console.log("\n\n" + req.query.text)
+        var name = req.query.text;
+        var path = req.query.path
+        client.execute(
+            "XQUERY " +
+            "let $fileName := '"+name+"' "+
+            "let $filePath :='"+path+"'"+
+            "return (db:add('Colenso',$fileName,$filePath))",
+            function(error,result){
+                if(error){
+                    console.error(error);
+                    res.render('add',{
+                        title: 'Colenso Project Home',
+                        fail: true,
+                        name:name
+                    });
+                }
+                else{
+                    res.render('add',{
+                        title: 'Colenso Project Home',
+                        success: true,
+                        name:name
+                    });
+                }
+            }
+
+        )
+
+    }
+})
 module.exports = router;

@@ -1,0 +1,25 @@
+extends layout
+
+block body
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
+			+nav_item("/") Home
+			+nav_item("/list") Document list
+			+nav_item("/search") Search
+			+nav_item("/add","active") Add Document
+		.container
+			h1= title
+			p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
+			| We are based in !{place}.
+		.container
+			if fileSelected == 'false'
+				h3 please fill the following forms so we can add your document
+			if success == true
+				+alert-i-success("The Document was added successfully")
+			if fail == true
+				+alert-i-danger("The Document was not added successfully")
+			+panel-success("Add a document to the database")
+				form(action="/add",method="get")
+					+input("text","addLoc","Name","Document Name",type = "text")
+					+input("text","addLoc","location","Path to the Document",type = "path")
+					+submit-success("Add Document")
