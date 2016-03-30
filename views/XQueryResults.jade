@@ -24,6 +24,12 @@ block  body
 				form(action="/XQueryResults",method="get")
 					+input("text","searchString","Query","Search-XQuery",type="text")
 					+submit-primary("Search")
+			+panel-success("Nested XQuery Search")
+				form(action="/XQueryResults/nested",method="get")
+					+input("text","searchString","Query","Search-XQuery",type="text")
+					input(type = "checkbox" name = "oldQuery" value = "#{searchString}" checked) 
+					br
+					+submit-primary("Search")
 	if failed == "true"
 		.container
 			h3 Your search of #{searchString} failed to return any results

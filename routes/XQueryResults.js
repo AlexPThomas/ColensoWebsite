@@ -7,9 +7,6 @@ client.execute("OPEN Colenso");
 
 router.get('/', function(req, res, next) {
     var searchString = req.query.text;
-    var containsText = ' . contains text '
-
-    console.log(searchString)
     client.execute(
         "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
         "for $n in (collection('Colenso/')"+searchString+")\n"+
@@ -39,6 +36,40 @@ router.get('/', function(req, res, next) {
 
     )
 });
+
+router.get('/nested', function(req, res, next){
+    var newQuery = req.query.text
+    var oldQuery = req.query.oldQuery;
+    searchString = oldQuery + newQuery;
+
+    client.execute(
+        "XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
+        "for $m in (for $n in (collection('Colenso/')"+oldQuery+") return $n)\n"+
+        "where $m"+newQuery+"\n"+
+        " return db:path($m)",
+        function (error, result){
+            if(error){
+                console.error(error);
+                res.render('XQueryResults',{
+                    title: 'Colenso Project Search XQuery',
+                    searchString:searchString,
+                    failed: 'true'
+                });
+            }else{
+                var results = result.result;
+                results = results.split('\n');
+                results = removeDuplicates(results);
+                var resultCount = results.length;
+                res.render('XQueryResults', {
+                    title: 'Colenso Project Search XQuery',
+                    results:results,
+                    resultCount:resultCount,
+                    searchString:searchString
+                });
+            }
+        }
+    )
+})
 function removeDuplicates(results){
     var newResults = [];
     for(var i = 0; i < results.length; i++){
