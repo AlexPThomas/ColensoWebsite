@@ -1,16 +1,16 @@
 extends layout
 
 block body
-	+navbar("Colenso Project", "dropdown_menu")
+	.jumbotron
+		+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/", "active") Home
 			+nav_item("/list") Document list
 			+nav_item("/search") Search
-			+nav_item("/statistics") statistics
-	.container
-		h1= title
-		p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
-		| We are based in !{place}.
-	.container
-		form(action="/search",method="get")
-			input(type="text",name="searchString")
-			input(type="submit")
+		.container
+			h1= title
+			p| Welcome to #{title}. We have an excellent collection of letters in stock for you.
+			| We are based in !{place}.
+		.container
+			form(action="/search",method="get")
+				input(type="text",name="searchString")
+				input(type="submit")

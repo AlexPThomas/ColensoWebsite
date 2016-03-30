@@ -6,10 +6,9 @@ var client = new basex.Session("127.0.0.1", 1984, "admin", "admin");
 client.execute("OPEN Colenso");
 
 router.get('/', function(req, res, next) {
-    var rootPath = "./Colenso/"
-    var docPath = req.query.path
-    var viewTEI = req.query.tei
-    console.log(docPath)
+    var rootPath = "./Colenso/";
+    var docPath = req.query.path;
+    var viewTEI = req.query.tei;
     client.execute(
         "XQUERY doc('" + rootPath + docPath + "')",
         function (error, result){

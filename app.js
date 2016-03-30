@@ -9,7 +9,7 @@ var cheerio = require('cheerio');
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
-var statistics = require('./routes/statistics');
+var stringResults = require('./routes/stringResults');
 var results = require('./routes/results');
 var view = require('./routes/view');
 var list = require('./routes/list');
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/search', search);
-app.use('/statistics', statistics);
+app.use('/stringResults', stringResults);
 app.use('/results',results);
 app.use('/view',view);
 app.use('/list',list)

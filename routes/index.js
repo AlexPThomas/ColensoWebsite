@@ -19,5 +19,19 @@ router.get("/",function(req,res){
   );
 });
 
+router.get("/download",function(req,res){
+    var rootPath = "./Colenso/";
+    var docPath = req.query.path;
+
+    client.execute(
+        "XQUERY doc('" + rootPath + docPath + "')",
+        function (error, result){
+            if(error){ console.error(error);}
+            else{
+                res.download('../../' + rootPath + docPath);
+            }
+        }
+    )
+})
 
 module.exports = router;

@@ -1,6 +1,6 @@
 extends layout
 
-block body
+block  body
 	.jumbotron
 		+navbar("Colenso Project", "dropdown_menu")
 			+nav_item("/") Home
@@ -10,20 +10,19 @@ block body
 			h1= title
 			p| Welcome to #{title}. 
 		.container
-			h3 Search by tei tags and attributes
-			form(action="/results",method="get")
-				+input("text","searchString","Search","Search-box",type="text")
-				+input("text","searchString","Attribute","Attribute",type="xPath")
-				+submit-primary("Search")
-			br
-		.container
 			h3 find all documents that contain specified text
 			h4 HINTS
 			ul 
-				li Make sure the text you are searching for is in quotes 'Wellington'
 				li The following logical operators are available for use - +and, +or
-				li Yes the + is necessary for the logical operators
+				li Make sure the text you are searching for is in quotes 'Wellington'
 				li A valid example search would be - 'Wellington' +and 'William'
 			form(action="/stringResults",method="get")
 				+input("text","searchString","Search","Search-box",type="text")
 				+submit-primary("Search")
+	.container
+		h3 There are #{resultCount} documents that contain '!{searchString}'
+		+list-group-custom()
+			each doc in results
+				+list-group-item("/view?path=" + doc +"&tei=false")
+					h5.list-group-item-heading View document #{doc}
+		
